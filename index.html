@@ -242,39 +242,43 @@
     
     <script>
         function downloadCalendar() {
-            const calendarData = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//BBQ Pickup//EN
-BEGIN:VEVENT
-UID:bbq-pickup-20250927@example.com
-DTSTART:20250927T180000Z
-DTEND:20250927T220000Z
-SUMMARY:BBQ Chicken Meal Pickup
-DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions.
-LOCATION:129-02 Liberty Ave, South Richmond Hill, NY
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:BBQ pickup tomorrow 2-6PM
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-PT1H
-ACTION:DISPLAY
-DESCRIPTION:BBQ pickup in 1 hour
-END:VALARM
-END:VEVENT
+            const calendarData = `BEGIN:VCALENDAR\r
+VERSION:2.0\r
+PRODID:-//BBQ Pickup//EN\r
+BEGIN:VEVENT\r
+UID:bbq-pickup-20250927@example.com\r
+DTSTART:20250927T180000Z\r
+DTEND:20250927T220000Z\r
+SUMMARY:BBQ Chicken Meal Pickup\r
+DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions.\r
+LOCATION:129-02 Liberty Ave, South Richmond Hill, NY\r
+BEGIN:VALARM\r
+TRIGGER:-P1D\r
+ACTION:DISPLAY\r
+DESCRIPTION:BBQ pickup tomorrow 2-6PM\r
+END:VALARM\r
+BEGIN:VALARM\r
+TRIGGER:-PT1H\r
+ACTION:DISPLAY\r
+DESCRIPTION:BBQ pickup in 1 hour\r
+END:VALARM\r
+END:VEVENT\r
 END:VCALENDAR`;
 
-            const blob = new Blob([calendarData], { type: 'text/calendar' });
+            const blob = new Blob([calendarData], { type: 'text/calendar;charset=utf-8' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
             a.download = 'bbq-pickup.ics';
             a.setAttribute('type', 'text/calendar');
+            a.style.display = 'none';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
+            
+            // Show confirmation
+            alert('Calendar file downloaded! Check your downloads folder and open with your calendar app.');
         }
     </script>
 </body>
