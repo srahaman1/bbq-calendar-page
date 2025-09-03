@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BBQ Pickup Calendar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2d6e3e 0%, #1a4d2e 100%);
+            min-height: 100vh;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Decorative circles matching your design */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: #ffd700;
+            opacity: 0.9;
+        }
+        
+        .circle-1 {
+            width: 150px;
+            height: 150px;
+            top: -75px;
+            left: -75px;
+        }
+        
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            top: 20px;
+            right: 50px;
+            opacity: 0.3;
+        }
+        
+        .circle-3 {
+            width: 40px;
+            height: 40px;
+            top: 120px;
+            right: 200px;
+        }
+        
+        .circle-4 {
+            width: 100px;
+            height: 100px;
+            bottom: 50px;
+            right: -50px;
+        }
+        
+        .circle-5 {
+            width: 60px;
+            height: 60px;
+            bottom: 150px;
+            left: 30px;
+        }
+        
+        /* Decorative wave pattern */
+        .wave {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 100px;
+            height: 20px;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    #ffd700 0px,
+                    #ffd700 8px,
+                    transparent 8px,
+                    transparent 16px
+                );
+            border-radius: 10px;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin: 30px 0 15px 0;
+            color: #ffd700;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .details {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .detail-item {
+            margin: 10px 0;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .button-container {
+            margin-top: 40px;
+        }
+        
+        .calendar-button {
+            padding: 18px 40px;
+            font-size: 1.3em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700 0%, #ffed4a 100%);
+            color: #1a4d2e;
+            border: 3px solid #ffd700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calendar-button:hover {
+            background: linear-gradient(45deg, #ffed4a 0%, #ffd700 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .calendar-button:active {
+            transform: translateY(0px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Halal badge style element */
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .badge-text {
+            color: #ffd700;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.4em; }
+            .calendar-button { 
+                padding: 15px 30px; 
+                font-size: 1.1em; 
+            }
+            .badge { 
+                width: 60px; 
+                height: 60px; 
+                top: 10px;
+                right: 10px;
+            }
+            .badge-text { font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative circles -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+    <div class="circle circle-4"></div>
+    <div class="circle circle-5"></div>
+    
+    <!-- Decorative wave -->
+    <div class="wave"></div>
+    
+    <!-- Badge -->
+    <div class="badge">
+        <div class="badge-text">BBQ<br>MEAL</div>
+    </div>
+    
+    <div class="container">
+        <h1>THANK YOU FOR YOUR BUSINESS!</h1>
+        
+        <h2>BBQ Chicken Meal Pickup</h2>
+        
+        <div class="details">
+            <div class="detail-item">📅 <span class="highlight">Friday, September 27, 2025</span></div>
+            <div class="detail-item">🕐 <span class="highlight">2:00 PM - 6:00 PM</span></div>
+            <div class="detail-item">📍 <span class="highlight">Fade Zone Barbershop</span></div>
+            <div class="detail-item">129-02 Liberty Ave, South Richmond Hill</div>
+            <div class="detail-item" style="margin-top: 15px; font-size: 0.9em;">Contact Barber for questions</div>
+        </div>
+        
+        <div class="button-container">
+            <button onclick="downloadCalendar()" class="calendar-button">
+                📅 Add to Calendar
+            </button>
+        </div>
+        
+        <div style="margin-top: 25px; font-size: 0.9em; opacity: 0.8;">
+            Includes reminders: 24 hours & 1 hour before pickup
+        </div>
+    </div>
+    
+    <script>
+        function downloadCalendar() {
+            const calendarData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BBQ Pickup//EN
+BEGIN:VEVENT
+UID:bbq-pickup-20250927@example.com
+DTSTART:20250927T180000Z
+DTEND:20250927T220000Z
+SUMMARY:BBQ Chicken Meal Pickup
+DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions.
+LOCATION:129-02 Liberty Ave, South Richmond Hill, NY
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:BBQ pickup tomorrow 2-6PM
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:BBQ pickup in 1 hour
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([calendarData], { type: 'text/calendar' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bbq-pickup.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
