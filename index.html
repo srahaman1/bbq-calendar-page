@@ -92,53 +92,62 @@
             font-weight: bold;
         }
         
-        .calendar-buttons {
+        .calendar-section {
             margin-top: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
         }
         
-        .platform-button {
-            padding: 18px 40px;
-            font-size: 1.2em;
+        .universal-button {
+            padding: 25px 50px;
+            font-size: 1.3em;
             font-weight: bold;
-            border: 3px solid #ffd700;
+            background: linear-gradient(45deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a4d2e;
+            border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            display: inline-block;
-            min-width: 250px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 300px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .google-calendar-button {
-            background: linear-gradient(45deg, #34A853 0%, #4CAF50 100%);
-            color: white;
+        .universal-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
         }
         
-        .android-ics-button {
-            background: linear-gradient(45deg, #FF6B35 0%, #FF8C42 100%);
-            color: white;
+        .universal-button:hover:before {
+            left: 100%;
         }
         
-        .ios-button {
-            background: linear-gradient(45deg, #007AFF 0%, #0056CC 100%);
-            color: white;
+        .universal-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
         }
         
-        .platform-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(255, 215, 0, 0.4);
+        .universal-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
         }
         
-        .platform-button:active {
-            transform: translateY(0px);
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        .button-icon {
+            font-size: 1.4em;
         }
         
         .badge {
@@ -164,27 +173,41 @@
         }
         
         .instruction-text {
-            margin-top: 15px;
-            font-size: 0.9em;
-            opacity: 0.8;
+            margin-top: 20px;
+            font-size: 1em;
+            opacity: 0.9;
+            color: #ffd700;
         }
         
         .help-text {
-            margin-top: 20px;
-            font-size: 0.85em;
-            opacity: 0.7;
+            margin-top: 25px;
+            font-size: 0.9em;
+            opacity: 0.8;
             background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            line-height: 1.5;
+        }
+        
+        .success-message {
+            margin-top: 20px;
             padding: 15px;
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid #4CAF50;
             border-radius: 10px;
+            color: #4CAF50;
+            font-weight: bold;
+            display: none;
         }
         
         @media (max-width: 600px) {
             h1 { font-size: 2em; }
             h2 { font-size: 1.4em; }
-            .platform-button { 
-                padding: 15px 30px; 
-                font-size: 1.0em;
-                min-width: 200px;
+            .universal-button { 
+                padding: 20px 40px; 
+                font-size: 1.1em;
+                min-width: 250px;
             }
             .badge { 
                 width: 60px; 
@@ -205,7 +228,7 @@
     <div class="wave"></div>
     
     <div class="badge">
-        <div class="badge-text">BBQ<br>MEAL</div>
+        <div class="badge-text">HALAL<br>BBQ</div>
     </div>
     
     <div class="container">
@@ -214,130 +237,90 @@
         <h2>BBQ Chicken Meal Pickup</h2>
         
         <div class="details">
-            <div class="detail-item">📅 <span class="highlight">Friday, September 20, 2025</span></div>
+            <div class="detail-item">📅 <span class="highlight">Saturday, September 20, 2025</span></div>
             <div class="detail-item">🕐 <span class="highlight">2:00 PM - 6:00 PM</span></div>
             <div class="detail-item">📍 <span class="highlight">Fade Zone Barbershop</span></div>
             <div class="detail-item">129-02 Liberty Ave, South Richmond Hill</div>
             <div class="detail-item" style="margin-top: 15px; font-size: 0.9em;">Contact Barber for questions</div>
         </div>
         
-        <div class="calendar-buttons">
-            <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NDRqYmMxNW5scGw3MjZsNGo4czQ3YWJwdmkgc2hvYWlieHJhQG0&tmsrc=shoaibxra%40gmail.com" 
-               target="_blank" 
-               class="platform-button google-calendar-button">
-                📅 Google Calendar (Web)
-            </a>
-            
-            <button onclick="downloadAndroidICS()" class="platform-button android-ics-button">
-                📱 Android - Download ICS File
+        <div class="calendar-section">
+            <button onclick="downloadUniversalICS()" class="universal-button">
+                <span class="button-icon">📅</span>
+                Add to Calendar
             </button>
             
-            <button onclick="downloadICS()" class="platform-button ios-button">
-                🍎 iPhone - Add to Calendar
-            </button>
-        </div>
-        
-        <div class="instruction-text">
-            Includes reminders: 24 hours & 1 hour before pickup
+            <div class="instruction-text">
+                Works with all calendar apps & devices
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                ✅ Calendar file downloaded! Open the file to add the event to your calendar.
+            </div>
         </div>
         
         <div class="help-text">
-            <strong>Google Calendar (Web):</strong> Opens directly in Google Calendar online.<br><br>
-            <strong>Android users:</strong> Download the ICS file and open with your preferred calendar app.<br><br>
-            <strong>iPhone users:</strong> Tap the blue button to download a calendar file. Your iPhone will ask if you want to add it to Calendar.
+            After clicking, your device will download the file and prompt you to add it to your default calendar app. The event includes automatic reminders 24 hours and 1 hour before pickup.
         </div>
     </div>
 
     <script>
-        function downloadAndroidICS() {
+        function downloadUniversalICS() {
             // Generate DTSTAMP with current timestamp
             const now = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
             
+            // Universal ICS format optimized for maximum compatibility
             const calendarData = `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//BBQ Pickup Calendar//EN
+PRODID:-//BBQ Pickup Calendar//Universal Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
-UID:bbq-pickup-android-20250920@fadezone.com
+UID:bbq-pickup-universal-${now}@fadezone.com
 DTSTAMP:${now}
 DTSTART:20250920T180000Z
 DTEND:20250920T220000Z
 SUMMARY:BBQ Chicken Meal Pickup
-DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions. REMINDER: Bring your ticket!
+DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop.\\n\\nPickup Time: 2:00 PM - 6:00 PM\\nLocation: Fade Zone Barbershop\\nAddress: 129-02 Liberty Ave, South Richmond Hill, NY\\n\\nContact Barber for questions.\\n\\nREMINDER: Bring your ticket!
 LOCATION:Fade Zone Barbershop, 129-02 Liberty Ave, South Richmond Hill, NY
 STATUS:CONFIRMED
+CLASS:PUBLIC
 TRANSP:OPAQUE
+SEQUENCE:0
 BEGIN:VALARM
-UID:alarm-1day-${now}
-TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Reminder: BBQ pickup tomorrow 2-6PM at Fade Zone Barbershop
-SUMMARY:BBQ Pickup Tomorrow
+TRIGGER:-P1D
+DESCRIPTION:BBQ pickup tomorrow 2-6PM at Fade Zone Barbershop - don't forget your ticket!
 END:VALARM
 BEGIN:VALARM
-UID:alarm-1hour-${now}
-TRIGGER:-PT1H
 ACTION:DISPLAY
-DESCRIPTION:Reminder: BBQ pickup in 1 hour - don't forget your ticket!
-SUMMARY:BBQ Pickup in 1 Hour
+TRIGGER:-PT1H
+DESCRIPTION:BBQ pickup in 1 hour at Fade Zone Barbershop - bring your ticket!
 END:VALARM
 END:VEVENT
 END:VCALENDAR`;
 
+            // Create and download the ICS file
             const blob = new Blob([calendarData], { type: 'text/calendar;charset=utf-8' });
             const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'BBQ-Pickup-Android-Sept20.ics';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'BBQ-Pickup-Sept20.ics';
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
             
-            setTimeout(() => {
-                alert('Calendar file downloaded! Open the file with Google Calendar app or tap to add to your calendar.');
-            }, 500);
-        }
-
-        function downloadICS() {
-            const calendarData = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//BBQ Pickup//EN
-BEGIN:VEVENT
-UID:bbq-pickup-20250920@fadezone.com
-DTSTART:20250920T180000Z
-DTEND:20250920T220000Z
-SUMMARY:BBQ Chicken Meal Pickup
-DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions. REMINDER: Bring your ticket!
-LOCATION:Fade Zone Barbershop, 129-02 Liberty Ave, South Richmond Hill, NY
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:BBQ pickup tomorrow 2-6PM at Fade Zone Barbershop
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-PT1H
-ACTION:DISPLAY
-DESCRIPTION:BBQ pickup in 1 hour - don't forget your ticket!
-END:VALARM
-END:VEVENT
-END:VCALENDAR`;
-
-            const blob = new Blob([calendarData], { type: 'text/calendar;charset=utf-8' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'BBQ-Pickup-Sept20.ics';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
             
-            // User-friendly confirmation
+            // Hide success message after 5 seconds
             setTimeout(() => {
-                alert('Calendar file downloaded! Your iPhone should automatically ask to add this to Calendar. If not, check your Downloads and tap "BBQ-Pickup-Sept20.ics"');
-            }, 500);
+                successMessage.style.display = 'none';
+            }, 5000);
         }
     </script>
 </body>
