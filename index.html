@@ -202,7 +202,7 @@
         <h2>BBQ Chicken Meal Pickup</h2>
         
         <div class="details">
-            <div class="detail-item">📅 <span class="highlight">Friday, September 20, 2025</span></div>
+            <div class="detail-item">📅 <span class="highlight">Friday, September 27, 2025</span></div>
             <div class="detail-item">🕐 <span class="highlight">2:00 PM - 6:00 PM</span></div>
             <div class="detail-item">📍 <span class="highlight">Fade Zone Barbershop</span></div>
             <div class="detail-item">129-02 Liberty Ave, South Richmond Hill</div>
@@ -225,5 +225,47 @@
             Includes reminders: 24 hours & 1 hour before pickup
         </div>
     </div>
+    
+    <script>
+        function downloadICS() {
+            const calendarData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BBQ Pickup//EN
+BEGIN:VEVENT
+UID:bbq-pickup-20250927@fadezone.com
+DTSTART:20250927T180000Z
+DTEND:20250927T220000Z
+SUMMARY:BBQ Chicken Meal Pickup
+DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions. Bring your ticket!
+LOCATION:129-02 Liberty Ave, South Richmond Hill, NY
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:BBQ pickup tomorrow 2-6PM at Fade Zone Barbershop
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:BBQ pickup in 1 hour - Fade Zone Barbershop
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([calendarData], { type: 'text/calendar' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bbq-pickup.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Show helpful instruction after download
+            setTimeout(() => {
+                alert('Calendar file downloaded! Look for "bbq-pickup.ics" in your downloads. Tap the file to add the event to your iPhone calendar.');
+            }, 500);
+        }
+    </script>
 </body>
 </html>
