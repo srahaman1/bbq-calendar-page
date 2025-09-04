@@ -239,6 +239,26 @@
     </div>
 
     <script>
+        function openGoogleCalendar() {
+            // Detect if user is on mobile
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Mobile-friendly Google Calendar template URL with all details specified
+                const mobileUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+                    "&text=" + encodeURIComponent("BBQ Chicken Meal Pickup") +
+                    "&dates=20250920T180000Z/20250920T220000Z" +
+                    "&details=" + encodeURIComponent("Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions. REMINDER: Bring your ticket!") +
+                    "&location=" + encodeURIComponent("Fade Zone Barbershop, 129-02 Liberty Ave, South Richmond Hill, NY") +
+                    "&reminder=1440&reminder=60";
+                window.open(mobileUrl, '_blank');
+            } else {
+                // Desktop - use the template ID version that includes reminders
+                const desktopUrl = "https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NDRqYmMxNW5scGw3MjZsNGo4czQ3YWJwdmkgc2hvYWlieHJhQG0&tmsrc=shoaibxra%40gmail.com";
+                window.open(desktopUrl, '_blank');
+            }
+        }
+
         function downloadICS() {
             const calendarData = `BEGIN:VCALENDAR
 VERSION:2.0
