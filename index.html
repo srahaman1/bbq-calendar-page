@@ -114,6 +114,7 @@
             text-decoration: none;
             display: inline-block;
             min-width: 250px;
+            background: none;
         }
         
         .android-button {
@@ -255,16 +256,20 @@ END:VCALENDAR`;
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'bbq-pickup.ics';
+            a.download = 'BBQ-Pickup-Sept20.ics';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
             
-            // Show instruction for iPhone users
+            // Most iPhones will auto-prompt to add to calendar
             setTimeout(() => {
-                alert('Calendar file downloaded! Look for "bbq-pickup.ics" in your downloads, then tap it to add to your iPhone calendar.');
-            }, 500);
+                if (confirm('Did your iPhone automatically ask to add this event to Calendar? If not, check your Downloads and tap the "BBQ-Pickup-Sept20.ics" file.')) {
+                    // User confirmed it worked automatically
+                } else {
+                    alert('Look for "BBQ-Pickup-Sept20.ics" in your Downloads folder and tap it to add to Calendar.');
+                }
+            }, 1000);
         }
     </script>
 </body>
