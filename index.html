@@ -225,18 +225,18 @@
             Includes reminders: 24 hours & 1 hour before pickup
         </div>
     </div>
-    
+
     <script>
         function downloadICS() {
             const calendarData = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//BBQ Pickup//EN
 BEGIN:VEVENT
-UID:bbq-pickup-20250927@fadezone.com
-DTSTART:20250927T180000Z
-DTEND:20250927T220000Z
+UID:bbq-pickup-20250920@fadezone.com
+DTSTART:20250920T180000Z
+DTEND:20250920T220000Z
 SUMMARY:BBQ Chicken Meal Pickup
-DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions. Bring your ticket!
+DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions. REMINDER: Bring your ticket!
 LOCATION:129-02 Liberty Ave, South Richmond Hill, NY
 BEGIN:VALARM
 TRIGGER:-P1D
@@ -246,7 +246,7 @@ END:VALARM
 BEGIN:VALARM
 TRIGGER:-PT1H
 ACTION:DISPLAY
-DESCRIPTION:BBQ pickup in 1 hour - Fade Zone Barbershop
+DESCRIPTION:BBQ pickup in 1 hour - don't forget your ticket!
 END:VALARM
 END:VEVENT
 END:VCALENDAR`;
@@ -261,9 +261,9 @@ END:VCALENDAR`;
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
             
-            // Show helpful instruction after download
+            // Show instruction for iPhone users
             setTimeout(() => {
-                alert('Calendar file downloaded! Look for "bbq-pickup.ics" in your downloads. Tap the file to add the event to your iPhone calendar.');
+                alert('Calendar file downloaded! Look for "bbq-pickup.ics" in your downloads, then tap it to add to your iPhone calendar.');
             }, 500);
         }
     </script>
