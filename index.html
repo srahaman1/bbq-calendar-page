@@ -116,8 +116,13 @@
             min-width: 250px;
         }
         
-        .android-button {
+        .google-calendar-button {
             background: linear-gradient(45deg, #34A853 0%, #4CAF50 100%);
+            color: white;
+        }
+        
+        .android-ics-button {
+            background: linear-gradient(45deg, #FF6B35 0%, #FF8C42 100%);
             color: white;
         }
         
@@ -219,9 +224,13 @@
         <div class="calendar-buttons">
             <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NDRqYmMxNW5scGw3MjZsNGo4czQ3YWJwdmkgc2hvYWlieHJhQG0&tmsrc=shoaibxra%40gmail.com" 
                target="_blank" 
-               class="platform-button android-button">
-                📱 Android - Add to Calendar
+               class="platform-button google-calendar-button">
+                📅 Google Calendar (Web)
             </a>
+            
+            <button onclick="downloadAndroidICS()" class="platform-button android-ics-button">
+                📱 Android - Download ICS File
+            </button>
             
             <button onclick="downloadICS()" class="platform-button ios-button">
                 🍎 iPhone - Add to Calendar
@@ -233,8 +242,9 @@
         </div>
         
         <div class="help-text">
-            <strong>iPhone users:</strong> Tap the blue button to download a calendar file. Your iPhone will ask if you want to add it to Calendar.<br><br>
-            <strong>Android users:</strong> Tap the green button to open Google Calendar directly.
+            <strong>Google Calendar (Web):</strong> Opens directly in Google Calendar online.<br><br>
+            <strong>Android users:</strong> Download the ICS file and open with your preferred calendar app.<br><br>
+            <strong>iPhone users:</strong> Tap the blue button to download a calendar file. Your iPhone will ask if you want to add it to Calendar.
         </div>
     </div>
 
