@@ -114,7 +114,6 @@
             text-decoration: none;
             display: inline-block;
             min-width: 250px;
-            background: none;
         }
         
         .android-button {
@@ -123,18 +122,16 @@
         }
         
         .ios-button {
-            background: linear-gradient(45deg, #000000 0%, #333333 100%);
+            background: linear-gradient(45deg, #007AFF 0%, #0056CC 100%);
             color: white;
-            opacity: 0.6;
-            cursor: not-allowed;
         }
         
-        .platform-button:hover:not(.ios-button) {
+        .platform-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 25px rgba(255, 215, 0, 0.4);
         }
         
-        .platform-button:active:not(.ios-button) {
+        .platform-button:active {
             transform: translateY(0px);
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
@@ -165,6 +162,15 @@
             margin-top: 15px;
             font-size: 0.9em;
             opacity: 0.8;
+        }
+        
+        .help-text {
+            margin-top: 20px;
+            font-size: 0.85em;
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
         }
         
         @media (max-width: 600px) {
@@ -203,7 +209,7 @@
         <h2>BBQ Chicken Meal Pickup</h2>
         
         <div class="details">
-            <div class="detail-item">📅 <span class="highlight">Friday, September 27, 2025</span></div>
+            <div class="detail-item">📅 <span class="highlight">Friday, September 20, 2025</span></div>
             <div class="detail-item">🕐 <span class="highlight">2:00 PM - 6:00 PM</span></div>
             <div class="detail-item">📍 <span class="highlight">Fade Zone Barbershop</span></div>
             <div class="detail-item">129-02 Liberty Ave, South Richmond Hill</div>
@@ -211,19 +217,24 @@
         </div>
         
         <div class="calendar-buttons">
-            <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NDRqYmMxNW5scGw3MjZsNGo4czQ3YWJwdmkgc2hvYWlieHJhQG0&tmsrc=shoaibxra%40gmail.com" 
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=BBQ%20Chicken%20Meal%20Pickup&dates=20250920T180000Z/20250920T220000Z&details=Pick%20up%20your%20BBQ%20Chicken%20Meal%20at%20Fade%20Zone%20Barbershop.%20Contact%20Barber%20for%20questions.%20REMINDER:%20Bring%20your%20ticket!&location=129-02%20Liberty%20Ave,%20South%20Richmond%20Hill,%20NY" 
                target="_blank" 
                class="platform-button android-button">
                 📱 Android - Add to Calendar
             </a>
             
-            <button class="platform-button ios-button" disabled>
+            <button onclick="downloadICS()" class="platform-button ios-button">
                 🍎 iPhone - Add to Calendar
             </button>
         </div>
         
         <div class="instruction-text">
             Includes reminders: 24 hours & 1 hour before pickup
+        </div>
+        
+        <div class="help-text">
+            <strong>iPhone users:</strong> Tap the blue button to download a calendar file. Your iPhone will ask if you want to add it to Calendar.<br><br>
+            <strong>Android users:</strong> Tap the green button to open Google Calendar directly.
         </div>
     </div>
 
@@ -238,7 +249,7 @@ DTSTART:20250920T180000Z
 DTEND:20250920T220000Z
 SUMMARY:BBQ Chicken Meal Pickup
 DESCRIPTION:Pick up your BBQ Chicken Meal at Fade Zone Barbershop. Contact Barber for questions. REMINDER: Bring your ticket!
-LOCATION:129-02 Liberty Ave, South Richmond Hill, NY
+LOCATION:Fade Zone Barbershop, 129-02 Liberty Ave, South Richmond Hill, NY
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -252,7 +263,7 @@ END:VALARM
 END:VEVENT
 END:VCALENDAR`;
 
-            const blob = new Blob([calendarData], { type: 'text/calendar' });
+            const blob = new Blob([calendarData], { type: 'text/calendar;charset=utf-8' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -262,14 +273,10 @@ END:VCALENDAR`;
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
             
-            // Most iPhones will auto-prompt to add to calendar
+            // User-friendly confirmation
             setTimeout(() => {
-                if (confirm('Did your iPhone automatically ask to add this event to Calendar? If not, check your Downloads and tap the "BBQ-Pickup-Sept20.ics" file.')) {
-                    // User confirmed it worked automatically
-                } else {
-                    alert('Look for "BBQ-Pickup-Sept20.ics" in your Downloads folder and tap it to add to Calendar.');
-                }
-            }, 1000);
+                alert('Calendar file downloaded! Your iPhone should automatically ask to add this to Calendar. If not, check your Downloads and tap "BBQ-Pickup-Sept20.ics"');
+            }, 500);
         }
     </script>
 </body>
